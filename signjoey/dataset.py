@@ -47,8 +47,8 @@ class SignTranslationDataset(data.Dataset):
             fields = [
                 ("sequence", fields[0]),
                 ("sgn", fields[1]),
-                ("vrs_enc", fields[2]),
-                ("vrs_dec", fields[3]),
+                ("gls", fields[2]),
+                ("txt", fields[3]),
             ]
 
         if not isinstance(path, list):
@@ -67,8 +67,8 @@ class SignTranslationDataset(data.Dataset):
                 else:
                     samples[seq_label] = {
                         "label": s["label"],
-                        "verse_enc": s["verse"],
-                        "verse_dec": s["verse"],
+                        "gloss": s["verse"],
+                        "text": s["verse"],
                         "sign": s["signs"],
                     }
 
@@ -81,8 +81,8 @@ class SignTranslationDataset(data.Dataset):
                         sample["label"],
                         # This is for numerical stability
                         sample["sign"] + 1e-8,
-                        sample["verse_enc"].strip(),
-                        sample["verse_dec"].strip(),
+                        sample["gls"].strip(),
+                        sample["txt"].strip(),
                     ],
                     fields,
                 )

@@ -2,6 +2,7 @@
 """
 Data module
 """
+import numpy as np
 from torchtext import data
 from torchtext.data import Field, RawField
 from typing import List, Tuple
@@ -11,6 +12,9 @@ import torch
 
 
 def load_dataset_file(filename):
+    import os
+    print(os.getcwd())
+    print(filename)
     with gzip.open(filename, "rb") as f:
         loaded_object = pickle.load(f)
         return loaded_object
@@ -26,7 +30,7 @@ class SignTranslationDataset(data.Dataset):
     def __init__(
         self,
         path: str,
-        fields: Tuple[RawField, RawField, Field, Field, Field],
+        fields: Tuple[RawField, Field, Field, Field],
         **kwargs
     ):
         """Create a SignTranslationDataset given paths and fields.
@@ -42,10 +46,9 @@ class SignTranslationDataset(data.Dataset):
         if not isinstance(fields[0], (tuple, list)):
             fields = [
                 ("sequence", fields[0]),
-                ("signer", fields[1]),
-                ("sgn", fields[2]),
-                ("gls", fields[3]),
-                ("txt", fields[4]),
+                ("sgn", fields[1]),
+                ("vrs_enc", fields[2]),
+                ("vrs_dec", fields[3]),
             ]
 
         if not isinstance(path, list):
@@ -55,22 +58,18 @@ class SignTranslationDataset(data.Dataset):
         for annotation_file in path:
             tmp = load_dataset_file(annotation_file)
             for s in tmp:
-                seq_id = s["name"]
-                if seq_id in samples:
-                    assert samples[seq_id]["name"] == s["name"]
-                    assert samples[seq_id]["signer"] == s["signer"]
-                    assert samples[seq_id]["gloss"] == s["gloss"]
-                    assert samples[seq_id]["text"] == s["text"]
-                    samples[seq_id]["sign"] = torch.cat(
-                        [samples[seq_id]["sign"], s["sign"]], axis=1
-                    )
+                seq_label = s["label"]
+
+                res = np.array(list(s["signs"].values()))
+                s["signs"] = torch.Tensor(res.squeeze())
+                if seq_label in samples:
+                    raise Exception(f"Label {seq_label} already exists.")
                 else:
-                    samples[seq_id] = {
-                        "name": s["name"],
-                        "signer": s["signer"],
-                        "gloss": s["gloss"],
-                        "text": s["text"],
-                        "sign": s["sign"],
+                    samples[seq_label] = {
+                        "label": s["label"],
+                        "verse_enc": s["verse"],
+                        "verse_dec": s["verse"],
+                        "sign": s["signs"],
                     }
 
         examples = []
@@ -79,12 +78,11 @@ class SignTranslationDataset(data.Dataset):
             examples.append(
                 data.Example.fromlist(
                     [
-                        sample["name"],
-                        sample["signer"],
+                        sample["label"],
                         # This is for numerical stability
                         sample["sign"] + 1e-8,
-                        sample["gloss"].strip(),
-                        sample["text"].strip(),
+                        sample["verse_enc"].strip(),
+                        sample["verse_dec"].strip(),
                     ],
                     fields,
                 )

@@ -1,13 +1,13 @@
 name: sign_experiment
 data:
-    data_path: ./data/
+    data_path: ../data/
     version: phoenix_2014_trans
     sgn: sign
     txt: text
     gls: gloss
-    train: PHOENIX2014T/phoenix14t.pami0.train
+    train: PHOENIX2014T/phoenix14t.pami0.dev
     dev: PHOENIX2014T/phoenix14t.pami0.dev
-    test: PHOENIX2014T/phoenix14t.pami0.test
+    test: PHOENIX2014T/phoenix14t.pami0.dev
     feature_size: 1024
     level: word
     txt_lowercase: true

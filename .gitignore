@@ -2,3 +2,6 @@
 .idea/
 
 *.pyc
+data/
+signjoey/sign_sample_model
+.python-version

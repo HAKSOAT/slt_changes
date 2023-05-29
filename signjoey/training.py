@@ -93,6 +93,7 @@ class TrainManager:
         self.optimizer = build_optimizer(
             config=train_config, parameters=model.parameters()
         )
+        # q: What is the job of the batch multiplier?
         self.batch_multiplier = train_config.get("batch_multiplier", 1)
 
         # validation & early stopping
@@ -100,6 +101,7 @@ class TrainManager:
         self.num_valid_log = train_config.get("num_valid_log", 5)
         self.ckpt_queue = queue.Queue(maxsize=train_config.get("keep_last_ckpts", 5))
         self.eval_metric = train_config.get("eval_metric", "bleu")
+        # Q: What are these evaluation metrics?
         if self.eval_metric not in ["bleu", "chrf", "wer", "rouge"]:
             raise ValueError(
                 "Invalid setting for 'eval_metric': {}".format(self.eval_metric)
@@ -121,6 +123,7 @@ class TrainManager:
             if self.eval_metric in ["bleu", "chrf", "rouge"]:
                 assert self.do_translation
                 self.minimize_metric = False
+            #     Q: They say something is not yet implemented here, can it possibly affect the results?
             else:  # eval metric that has to get minimized (not yet implemented)
                 self.minimize_metric = True
         else:
@@ -224,6 +227,7 @@ class TrainManager:
         self.translation_normalization_mode = train_config.get(
             "translation_normalization", "batch"
         )
+        # Q: What does translation normalization mode mean?
         if self.translation_normalization_mode not in ["batch", "tokens"]:
             raise ValueError(
                 "Invalid normalization {}.".format(self.translation_normalization_mode)

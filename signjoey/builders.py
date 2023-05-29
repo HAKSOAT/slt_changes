@@ -29,6 +29,10 @@ def build_gradient_clipper(config: dict) -> Optional[Callable]:
     :return: clipping function (in-place) or None if no gradient clipping
     """
     clip_grad_fun = None
+    # Q: How does one decide what value to use for clipping?
+    # A: https://www.reddit.com/r/MachineLearning/comments/kqgne3/choosing_gradient_norm_clip_value_d/
+    # Common values are between -1 and 10, however nobody says much about what values are the best. The case of exploding
+    # gradient could happen "if a minibatch is bad". However, I do not know what it means for a minibatch to be bad yet.
     if "clip_grad_val" in config.keys():
         clip_value = config["clip_grad_val"]
         clip_grad_fun = lambda params: nn.utils.clip_grad_value_(
@@ -72,6 +76,7 @@ def build_optimizer(config: dict, parameters) -> Optimizer:
     :param parameters:
     :return: optimizer
     """
+    # Q: Why are they using "radam" here? Could it be typo?
     optimizer_name = config.get("optimizer", "radam").lower()
     learning_rate = config.get("learning_rate", 3.0e-4)
     weight_decay = config.get("weight_decay", 0)

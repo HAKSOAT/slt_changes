@@ -93,7 +93,7 @@ def load_data(data_cfg: dict) -> (Dataset, Dataset, Dataset, Vocabulary, Vocabul
         pad_token=torch.zeros((pad_feature_size,)),
     )
 
-    verse_enc_field = data.Field(
+    gls_field = data.Field(
         pad_token=PAD_TOKEN,
         tokenize=tokenize_text,
         batch_first=True,
@@ -101,7 +101,7 @@ def load_data(data_cfg: dict) -> (Dataset, Dataset, Dataset, Vocabulary, Vocabul
         include_lengths=True,
     )
 
-    verse_dec_field = data.Field(
+    txt_field = data.Field(
         init_token=BOS_TOKEN,
         eos_token=EOS_TOKEN,
         pad_token=PAD_TOKEN,
@@ -114,34 +114,32 @@ def load_data(data_cfg: dict) -> (Dataset, Dataset, Dataset, Vocabulary, Vocabul
 
     train_data = SignTranslationDataset(
         path=train_paths,
-        fields=(sequence_field, sgn_field, verse_enc_field, verse_dec_field),
+        fields=(sequence_field, sgn_field, gls_field, txt_field),
         filter_pred=lambda x: len(vars(x)["sgn"]) <= max_sent_length
-        and len(vars(x)["vrs_dec"]) <= max_sent_length,
+        and len(vars(x)["txt"]) <= max_sent_length,
     )
 
-    vrs_enc_max_size = data_cfg.get("vrs_enc_voc_limit", sys.maxsize)
-    vrs_enc_min_freq = data_cfg.get("vrs_enc_voc_min_freq", 1)
-    vrs_dec_max_size = data_cfg.get("vrs_dec_voc_limit", sys.maxsize)
-    vrs_dec_min_freq = data_cfg.get("vrs_dec_voc_min_freq", 1)
+    gls_max_size = data_cfg.get("gls_voc_limit", sys.maxsize)
+    gls_min_freq = data_cfg.get("gls_voc_min_freq", 1)
+    txt_max_size = data_cfg.get("txt_voc_limit", sys.maxsize)
+    txt_min_freq = data_cfg.get("txt_voc_min_freq", 1)
 
-    vrs_enc_vocab_file = data_cfg.get("vrs_enc_vocab", None)
-    vrs_dec_vocab_file = data_cfg.get("vrs_dec_vocab", None)
+    gls_vocab_file = data_cfg.get("gls_vocab", None)
+    txt_vocab_file = data_cfg.get("txt_vocab", None)
 
-    # H: We can use the gls vocabulary directly for the verse on the encoder side.
-    # To confirm this hypothesis after running later.
-    vrs_enc_vocab = build_vocab(
+    gls_vocab = build_vocab(
         field="gls",
-        min_freq=vrs_enc_min_freq,
-        max_size=vrs_enc_max_size,
+        min_freq=gls_min_freq,
+        max_size=gls_max_size,
         dataset=train_data,
-        vocab_file=vrs_enc_vocab_file,
+        vocab_file=gls_vocab_file,
     )
-    vrs_dec_vocab = build_vocab(
+    txt_vocab = build_vocab(
         field="txt",
-        min_freq=vrs_dec_min_freq,
-        max_size=vrs_dec_max_size,
+        min_freq=txt_min_freq,
+        max_size=txt_max_size,
         dataset=train_data,
-        vocab_file=vrs_dec_vocab_file,
+        vocab_file=txt_vocab_file,
     )
     random_train_subset = data_cfg.get("random_train_subset", -1)
     if random_train_subset > -1:
@@ -154,7 +152,7 @@ def load_data(data_cfg: dict) -> (Dataset, Dataset, Dataset, Vocabulary, Vocabul
 
     dev_data = SignTranslationDataset(
         path=dev_paths,
-        fields=(sequence_field, sgn_field, verse_enc_field, verse_dec_field),
+        fields=(sequence_field, sgn_field, gls_field, txt_field),
     )
     random_dev_subset = data_cfg.get("random_dev_subset", -1)
     if random_dev_subset > -1:
@@ -168,12 +166,12 @@ def load_data(data_cfg: dict) -> (Dataset, Dataset, Dataset, Vocabulary, Vocabul
     # check if target exists
     test_data = SignTranslationDataset(
         path=test_paths,
-        fields=(sequence_field, sgn_field, verse_enc_field, verse_dec_field),
+        fields=(sequence_field, sgn_field, gls_field, txt_field),
     )
 
-    verse_enc_field.vocab = vrs_enc_vocab
-    verse_dec_field.vocab = vrs_dec_vocab
-    return train_data, dev_data, test_data, vrs_enc_vocab, vrs_dec_vocab
+    gls_field.vocab = gls_vocab
+    txt_field.vocab = txt_vocab
+    return train_data, dev_data, test_data, gls_vocab, txt_vocab
 
 
 # TODO (Cihan): I don't like this use of globals.

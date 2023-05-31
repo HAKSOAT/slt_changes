@@ -3,6 +3,7 @@
 Data module
 """
 import numpy as np
+from collections import OrderedDict
 from torchtext import data
 from torchtext.data import Field, RawField
 from typing import List, Tuple
@@ -12,10 +13,8 @@ import torch
 
 
 def load_dataset_file(filename):
-    import os
-    print(os.getcwd())
-    print(filename)
-    with gzip.open(filename, "rb") as f:
+    # with gzip.open(, "rb") as f:
+    with open(filename, "rb") as f:
         loaded_object = pickle.load(f)
         return loaded_object
 
@@ -58,15 +57,17 @@ class SignTranslationDataset(data.Dataset):
         for annotation_file in path:
             tmp = load_dataset_file(annotation_file)
             for s in tmp:
-                seq_label = s["label"]
+                # TODO (HABEEB): Rename to label.
+                seq_label = s["labels"]
 
-                res = np.array(list(s["signs"].values()))
+                ordered_signs = OrderedDict(sorted(s["signs"].items(), key=lambda x: int(x[0])))
+                res = np.array(list(ordered_signs.values()))
                 s["signs"] = torch.Tensor(res.squeeze())
                 if seq_label in samples:
                     raise Exception(f"Label {seq_label} already exists.")
                 else:
                     samples[seq_label] = {
-                        "label": s["label"],
+                        "label": s["labels"],
                         "gloss": s["verse"],
                         "text": s["verse"],
                         "sign": s["signs"],
@@ -81,8 +82,8 @@ class SignTranslationDataset(data.Dataset):
                         sample["label"],
                         # This is for numerical stability
                         sample["sign"] + 1e-8,
-                        sample["gls"].strip(),
-                        sample["txt"].strip(),
+                        sample["gloss"].strip(),
+                        sample["text"].strip(),
                     ],
                     fields,
                 )

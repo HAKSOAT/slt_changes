@@ -37,7 +37,7 @@ class Batch:
 
         # Sequence Information
         self.sequence = torch_batch.sequence
-        self.signer = torch_batch.signer
+        # self.signer = torch_batch.signer
         # Sign
         self.sgn, self.sgn_lengths = torch_batch.sgn
 
@@ -140,7 +140,7 @@ class Batch:
         self.sgn_mask = self.sgn_mask[perm_index]
         self.sgn_lengths = self.sgn_lengths[perm_index]
 
-        self.signer = [self.signer[pi] for pi in perm_index]
+        # self.signer = [self.signer[pi] for pi in perm_index]
         self.sequence = [self.sequence[pi] for pi in perm_index]
 
         if self.gls is not None:

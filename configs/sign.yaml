@@ -5,9 +5,9 @@ data:
     sgn: sign
     txt: text
     gls: gloss
-    train: PHOENIX2014T/phoenix14t.pami0.dev
-    dev: PHOENIX2014T/phoenix14t.pami0.dev
-    test: PHOENIX2014T/phoenix14t.pami0.dev
+    train: PHOENIX2014T/test.pickle
+    dev: PHOENIX2014T/test.pickle
+    test: PHOENIX2014T/test.pickle
     feature_size: 1024
     level: word
     txt_lowercase: true
@@ -58,7 +58,8 @@ training:
     learning_rate: 0.001
     batch_size: 32
     num_valid_log: 5
-    epochs: 5000000
+    epochs: 500
+#    epochs: 5000000
     early_stopping_metric: eval_metric
     batch_type: sentence
     translation_normalization: batch

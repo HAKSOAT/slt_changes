@@ -5,10 +5,10 @@ data:
     sgn: sign
     txt: text
     gls: gloss
-    train: PHOENIX2014T/test.pickle
-    dev: PHOENIX2014T/test.pickle
-    test: PHOENIX2014T/test.pickle
-    feature_size: 1024
+    train: PHOENIX2014T/dev.pickle
+    dev: PHOENIX2014T/dev.pickle
+    test: PHOENIX2014T/dev.pickle
+    feature_size: 2048
     level: word
     txt_lowercase: true
     max_sent_length: 400

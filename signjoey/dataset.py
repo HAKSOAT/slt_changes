@@ -57,8 +57,7 @@ class SignTranslationDataset(data.Dataset):
         for annotation_file in path:
             tmp = load_dataset_file(annotation_file)
             for s in tmp:
-                # TODO (HABEEB): Rename to label.
-                seq_label = s["labels"]
+                seq_label = s["label"]
 
                 ordered_signs = OrderedDict(sorted(s["signs"].items(), key=lambda x: int(x[0])))
                 res = np.array(list(ordered_signs.values()))
@@ -66,12 +65,13 @@ class SignTranslationDataset(data.Dataset):
                 if seq_label in samples:
                     raise Exception(f"Label {seq_label} already exists.")
                 else:
-                    samples[seq_label] = {
-                        "label": s["labels"],
-                        "gloss": s["verse"],
-                        "text": s["verse"],
-                        "sign": s["signs"],
-                    }
+                    if s["signs"].shape[0]:
+                        samples[seq_label] = {
+                            "label": s["label"],
+                            "gloss": s["verse"],
+                            "text": s["verse"],
+                            "sign": s["signs"],
+                        }
 
         examples = []
         for s in samples:

@@ -57,17 +57,23 @@ class SignTranslationDataset(data.Dataset):
         for annotation_file in path:
             tmp = load_dataset_file(annotation_file)
             for s in tmp:
-                seq_label = s["label"]
+                if not s.get("labels") and not s.get("label"):
+                    raise KeyError("Key 'labels' or 'label' not found.")
 
-                ordered_signs = OrderedDict(sorted(s["signs"].items(), key=lambda x: int(x[0])))
-                res = np.array(list(ordered_signs.values()))
+                seq_label = s.get("labels") or s.get("label")
+
+                if isinstance(s["signs"], dict):
+                    ordered_signs = OrderedDict(sorted(s["signs"].items(), key=lambda x: int(x[0])))
+                    res = np.array(list(ordered_signs.values()))
+                else:
+                    res = s["signs"]
                 s["signs"] = torch.Tensor(res.squeeze())
                 if seq_label in samples:
                     raise Exception(f"Label {seq_label} already exists.")
                 else:
                     if s["signs"].shape[0]:
                         samples[seq_label] = {
-                            "label": s["label"],
+                            "label": s.get("labels") or s.get("label"),
                             "gloss": s["verse"],
                             "text": s["verse"],
                             "sign": s["signs"],

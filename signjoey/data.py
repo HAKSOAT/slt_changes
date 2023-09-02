@@ -7,6 +7,7 @@ import sys
 import random
 
 import torch
+from torch.nn.functional import pad
 from torchtext import data
 from torchtext.data import Dataset, Iterator
 import socket
@@ -77,7 +78,32 @@ def load_data(data_cfg: dict) -> (Dataset, Dataset, Dataset, Vocabulary, Vocabul
 
     # NOTE (Cihan): The something was necessary to match the function signature.
     def stack_features(features, something):
-        return torch.stack([torch.stack(ft, dim=0) for ft in features], dim=0)
+        max_row = 0
+        tmp_features = []
+        for ft in features:
+            stacked = torch.stack(ft, dim=0)
+            if len(stacked.shape) == 1:
+                stacked = stacked.unsqueeze(0)
+
+            tmp_features.append(stacked)
+            row = stacked.shape[0]
+            max_row = row if row > max_row else max_row
+
+        # Padding where necessary
+        # For example, if a feature is of size (3, 1024), but the max row seen is 5
+        # This will pad with zeros to (5, 1024)
+        for idx, ft in enumerate(tmp_features):
+            if ft.shape[0] < max_row:
+                pad_size = max_row - ft.shape[0]
+                column_start = 0
+                column_end = 0
+                row_start = 0
+                row_end = pad_size
+                tmp_features[idx] = pad(tmp_features[idx],
+                                        (column_start, column_end, row_start, row_end))
+
+        return torch.stack(tmp_features, dim=0)
+
 
     sequence_field = data.RawField()
 

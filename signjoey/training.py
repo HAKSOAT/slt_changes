@@ -1051,3 +1051,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     os.environ["CUDA_VISIBLE_DEVICES"] = args.gpu_id
     train(cfg_file=args.config)
+
+
+"605 	Text Reference  :	because you will not leave me*   in the ******** ** **** ** ** ***** ****** *** ** ***** ****** grave"
+"606 	Text Hypothesis :	then    the said to  him:  “what is the mountain to him: so he said: father and he said: father in      the true he  he    he   he    he  he he  he"

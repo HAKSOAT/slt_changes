@@ -75,9 +75,12 @@ def load_data(data_cfg: dict) -> (Dataset, Dataset, Dataset, Vocabulary, Vocabul
         ft_list = torch.split(features, 1, dim=0)
         return [ft.squeeze() for ft in ft_list]
 
+
     # NOTE (Cihan): The something was necessary to match the function signature.
     def stack_features(features, something):
-        return torch.stack([torch.stack(ft, dim=0) for ft in features], dim=0)
+        features = [torch.stack(ft, dim=0) for ft in features]
+            return torch.stack(features, dim =0)
+
 
     sequence_field = data.RawField()
 

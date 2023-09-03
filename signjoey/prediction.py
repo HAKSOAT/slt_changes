@@ -49,7 +49,7 @@ def validate_on_data(
     translation_beam_size: int = 1,
     translation_beam_alpha: int = -1,
     batch_type: str = "sentence",
-    dataset_version: str = "phoenix_2014_trans",
+    dataset_version: str = "asl_flow_trans",
     frame_subsampling_ratio: int = None,
 ) -> (
     float,
@@ -102,6 +102,8 @@ def validate_on_data(
         - decoded_valid: raw validation hypotheses (before post-processing),
         - valid_attention_scores: attention scores for validation hypotheses
     """
+
+
     valid_iter = make_data_iter(
         dataset=data,
         batch_size=batch_size,

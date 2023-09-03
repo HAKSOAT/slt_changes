@@ -39,7 +39,7 @@ def make_model_dir(model_dir: str, overwrite: bool = False) -> str:
     return model_dir
 
 
-def make_logger(model_dir: str, log_file: str = "train.log") -> Logger:
+def make_logger(model_dir: str, log_file: str = "resnet_train.csv") -> Logger:
     """
     Create a logger for logging the training process.
 

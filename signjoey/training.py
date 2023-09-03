@@ -56,7 +56,7 @@ class TrainManager:
         )
         self.logger = make_logger(model_dir=self.model_dir)
         self.logging_freq = train_config.get("logging_freq", 100)
-        self.valid_report_file = "{}/validations.txt".format(self.model_dir)
+        self.valid_report_file = "{}/resnet_validations.csv".format(self.model_dir)
         self.tb_writer = SummaryWriter(log_dir=self.model_dir + "/tensorboard/")
 
         # input

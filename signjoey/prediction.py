@@ -125,6 +125,9 @@ def validate_on_data(
         total_num_gls_tokens = 0
         total_num_seqs = 0
         for valid_batch in iter(valid_iter):
+            if not valid_batch:
+                continue
+
             batch = Batch(
                 is_train=False,
                 torch_batch=valid_batch,

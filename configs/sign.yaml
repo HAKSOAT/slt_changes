@@ -5,10 +5,17 @@ data:
     sgn: sign
     txt: text
     gls: gloss
+<<<<<<< HEAD
     train: asl_flow/ASL_train_data_flow.pickle
     dev: asl_flow/ASL_val_data_flow.pickle
     test: asl_flow/ASL_test_data_flow.pickle
     feature_size: 1024
+=======
+    train: PHOENIX2014T/dev.pickle
+    dev: PHOENIX2014T/dev.pickle
+    test: PHOENIX2014T/dev.pickle
+    feature_size: 2048
+>>>>>>> f5696d1bb95885f180c54966c9a4b20fdcff835b
     level: word
     txt_lowercase: true
     max_sent_length: 400

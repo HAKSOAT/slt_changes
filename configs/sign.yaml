@@ -5,10 +5,10 @@ data:
     sgn: sign
     txt: text
     gls: gloss
-    train: PHOENIX2014T/dev.pickle
-    dev: PHOENIX2014T/dev.pickle
-    test: PHOENIX2014T/dev.pickle
-    feature_size: 2048
+    train: PHOENIX2014T/ASL_val_data_flow.pickle
+    dev: PHOENIX2014T/ASL_val_data_flow.pickle
+    test: PHOENIX2014T/ASL_val_data_flow.pickle
+    feature_size: 1024
     level: word
     txt_lowercase: true
     max_sent_length: 400
@@ -57,7 +57,7 @@ training:
     optimizer: adam
     learning_rate: 0.001
     batch_size: 32
-    num_valid_log: 5
+    num_valid_log: 5 # This determines how many examples are logged to the console during validation logging, where the system shows results of predictions.
     epochs: 500
 #    epochs: 5000000
     early_stopping_metric: eval_metric
@@ -70,10 +70,12 @@ training:
     shuffle: true
     use_cuda: true
     translation_max_output_length: 30
-    keep_last_ckpts: 1
+    keep_last_ckpts: 5 # This determines how many checkpoints maximum are going to be saved. If you want more to be saved, then you need to use a larger number.
     batch_multiplier: 1
-    logging_freq: 100
-    validation_freq: 100
+    train_evaluation_freq: 1 # This controls how often evaluation on the batch dataset happens.
+    logging_freq: 1 # This controls how often logging happens. Logging shows the train loss.
+    validation_freq: 1 # This controls how often validation happens. This is where validation is done with the validation dataset.
+
     betas:
     - 0.9
     - 0.998

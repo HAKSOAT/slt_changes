@@ -1,21 +1,14 @@
 name: sign_experiment
 data:
     data_path: data/
-    version: asl_flow_trans
+    version: phoenix_2014_trans
     sgn: sign
     txt: text
     gls: gloss
-<<<<<<< HEAD
     train: asl_flow/ASL_train_data_flow.pickle
     dev: asl_flow/ASL_val_data_flow.pickle
     test: asl_flow/ASL_test_data_flow.pickle
     feature_size: 1024
-=======
-    train: PHOENIX2014T/dev.pickle
-    dev: PHOENIX2014T/dev.pickle
-    test: PHOENIX2014T/dev.pickle
-    feature_size: 2048
->>>>>>> f5696d1bb95885f180c54966c9a4b20fdcff835b
     level: word
     txt_lowercase: true
     max_sent_length: 400
@@ -65,8 +58,8 @@ training:
     learning_rate: 0.001
     batch_size: 32
     num_valid_log: 5
-    epochs: 5
-#    epochs: 5000000
+    #epochs: 5
+    epochs: 15
     early_stopping_metric: eval_metric
     batch_type: sentence
     translation_normalization: batch

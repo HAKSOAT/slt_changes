@@ -79,10 +79,6 @@ def load_data(data_cfg: dict) -> (Dataset, Dataset, Dataset, Vocabulary, Vocabul
 
     # NOTE (Cihan): The something was necessary to match the function signature.
     def stack_features(features, something):
-<<<<<<< HEAD
-        features = [torch.stack(ft, dim=0) for ft in features]
-            return torch.stack(features, dim =0)
-=======
         max_row = 0
         tmp_features = []
         for ft in features:
@@ -95,7 +91,7 @@ def load_data(data_cfg: dict) -> (Dataset, Dataset, Dataset, Vocabulary, Vocabul
             max_row = row if row > max_row else max_row
 
         # Padding where necessary
-        # For example, if a feature is of size (3, 1024), but the max row seen is 5
+     # For example, if a feature is of size (3, 1024), but the max row seen is 5
         # This will pad with zeros to (5, 1024)
         for idx, ft in enumerate(tmp_features):
             if ft.shape[0] < max_row:
@@ -108,7 +104,6 @@ def load_data(data_cfg: dict) -> (Dataset, Dataset, Dataset, Vocabulary, Vocabul
                                         (column_start, column_end, row_start, row_end))
 
         return torch.stack(tmp_features, dim=0)
->>>>>>> f5696d1bb95885f180c54966c9a4b20fdcff835b
 
 
     sequence_field = data.RawField()

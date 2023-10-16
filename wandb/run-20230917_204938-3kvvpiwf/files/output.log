@@ -1,0 +1,160 @@
+2023-09-17 20:50:38,254 Hello! This is Joey-NMT.
+2023-09-17 20:50:38,258 Total params: 58143760
+2023-09-17 20:50:38,259 Trainable parameters: ['decoder.layer_norm.bias', 'decoder.layer_norm.weight', 'decoder.layers.0.dec_layer_norm.bias', 'decoder.layers.0.dec_layer_norm.weight', 'decoder.layers.0.feed_forward.layer_norm.bias', 'decoder.layers.0.feed_forward.layer_norm.weight', 'decoder.layers.0.feed_forward.pwff_layer.0.bias', 'decoder.layers.0.feed_forward.pwff_layer.0.weight', 'decoder.layers.0.feed_forward.pwff_layer.3.bias', 'decoder.layers.0.feed_forward.pwff_layer.3.weight', 'decoder.layers.0.src_trg_att.k_layer.bias', 'decoder.layers.0.src_trg_att.k_layer.weight', 'decoder.layers.0.src_trg_att.output_layer.bias', 'decoder.layers.0.src_trg_att.output_layer.weight', 'decoder.layers.0.src_trg_att.q_layer.bias', 'decoder.layers.0.src_trg_att.q_layer.weight', 'decoder.layers.0.src_trg_att.v_layer.bias', 'decoder.layers.0.src_trg_att.v_layer.weight', 'decoder.layers.0.trg_trg_att.k_layer.bias', 'decoder.layers.0.trg_trg_att.k_layer.weight', 'decoder.layers.0.trg_trg_att.output_layer.bias', 'decoder.layers.0.trg_trg_att.output_layer.weight', 'decoder.layers.0.trg_trg_att.q_layer.bias', 'decoder.layers.0.trg_trg_att.q_layer.weight', 'decoder.layers.0.trg_trg_att.v_layer.bias', 'decoder.layers.0.trg_trg_att.v_layer.weight', 'decoder.layers.0.x_layer_norm.bias', 'decoder.layers.0.x_layer_norm.weight', 'decoder.layers.1.dec_layer_norm.bias', 'decoder.layers.1.dec_layer_norm.weight', 'decoder.layers.1.feed_forward.layer_norm.bias', 'decoder.layers.1.feed_forward.layer_norm.weight', 'decoder.layers.1.feed_forward.pwff_layer.0.bias', 'decoder.layers.1.feed_forward.pwff_layer.0.weight', 'decoder.layers.1.feed_forward.pwff_layer.3.bias', 'decoder.layers.1.feed_forward.pwff_layer.3.weight', 'decoder.layers.1.src_trg_att.k_layer.bias', 'decoder.layers.1.src_trg_att.k_layer.weight', 'decoder.layers.1.src_trg_att.output_layer.bias', 'decoder.layers.1.src_trg_att.output_layer.weight', 'decoder.layers.1.src_trg_att.q_layer.bias', 'decoder.layers.1.src_trg_att.q_layer.weight', 'decoder.layers.1.src_trg_att.v_layer.bias', 'decoder.layers.1.src_trg_att.v_layer.weight', 'decoder.layers.1.trg_trg_att.k_layer.bias', 'decoder.layers.1.trg_trg_att.k_layer.weight', 'decoder.layers.1.trg_trg_att.output_layer.bias', 'decoder.layers.1.trg_trg_att.output_layer.weight', 'decoder.layers.1.trg_trg_att.q_layer.bias', 'decoder.layers.1.trg_trg_att.q_layer.weight', 'decoder.layers.1.trg_trg_att.v_layer.bias', 'decoder.layers.1.trg_trg_att.v_layer.weight', 'decoder.layers.1.x_layer_norm.bias', 'decoder.layers.1.x_layer_norm.weight', 'decoder.layers.2.dec_layer_norm.bias', 'decoder.layers.2.dec_layer_norm.weight', 'decoder.layers.2.feed_forward.layer_norm.bias', 'decoder.layers.2.feed_forward.layer_norm.weight', 'decoder.layers.2.feed_forward.pwff_layer.0.bias', 'decoder.layers.2.feed_forward.pwff_layer.0.weight', 'decoder.layers.2.feed_forward.pwff_layer.3.bias', 'decoder.layers.2.feed_forward.pwff_layer.3.weight', 'decoder.layers.2.src_trg_att.k_layer.bias', 'decoder.layers.2.src_trg_att.k_layer.weight', 'decoder.layers.2.src_trg_att.output_layer.bias', 'decoder.layers.2.src_trg_att.output_layer.weight', 'decoder.layers.2.src_trg_att.q_layer.bias', 'decoder.layers.2.src_trg_att.q_layer.weight', 'decoder.layers.2.src_trg_att.v_layer.bias', 'decoder.layers.2.src_trg_att.v_layer.weight', 'decoder.layers.2.trg_trg_att.k_layer.bias', 'decoder.layers.2.trg_trg_att.k_layer.weight', 'decoder.layers.2.trg_trg_att.output_layer.bias', 'decoder.layers.2.trg_trg_att.output_layer.weight', 'decoder.layers.2.trg_trg_att.q_layer.bias', 'decoder.layers.2.trg_trg_att.q_layer.weight', 'decoder.layers.2.trg_trg_att.v_layer.bias', 'decoder.layers.2.trg_trg_att.v_layer.weight', 'decoder.layers.2.x_layer_norm.bias', 'decoder.layers.2.x_layer_norm.weight', 'decoder.output_layer.weight', 'encoder.layer_norm.bias', 'encoder.layer_norm.weight', 'encoder.layers.0.feed_forward.layer_norm.bias', 'encoder.layers.0.feed_forward.layer_norm.weight', 'encoder.layers.0.feed_forward.pwff_layer.0.bias', 'encoder.layers.0.feed_forward.pwff_layer.0.weight', 'encoder.layers.0.feed_forward.pwff_layer.3.bias', 'encoder.layers.0.feed_forward.pwff_layer.3.weight', 'encoder.layers.0.layer_norm.bias', 'encoder.layers.0.layer_norm.weight', 'encoder.layers.0.src_src_att.k_layer.bias', 'encoder.layers.0.src_src_att.k_layer.weight', 'encoder.layers.0.src_src_att.output_layer.bias', 'encoder.layers.0.src_src_att.output_layer.weight', 'encoder.layers.0.src_src_att.q_layer.bias', 'encoder.layers.0.src_src_att.q_layer.weight', 'encoder.layers.0.src_src_att.v_layer.bias', 'encoder.layers.0.src_src_att.v_layer.weight', 'encoder.layers.1.feed_forward.layer_norm.bias', 'encoder.layers.1.feed_forward.layer_norm.weight', 'encoder.layers.1.feed_forward.pwff_layer.0.bias', 'encoder.layers.1.feed_forward.pwff_layer.0.weight', 'encoder.layers.1.feed_forward.pwff_layer.3.bias', 'encoder.layers.1.feed_forward.pwff_layer.3.weight', 'encoder.layers.1.layer_norm.bias', 'encoder.layers.1.layer_norm.weight', 'encoder.layers.1.src_src_att.k_layer.bias', 'encoder.layers.1.src_src_att.k_layer.weight', 'encoder.layers.1.src_src_att.output_layer.bias', 'encoder.layers.1.src_src_att.output_layer.weight', 'encoder.layers.1.src_src_att.q_layer.bias', 'encoder.layers.1.src_src_att.q_layer.weight', 'encoder.layers.1.src_src_att.v_layer.bias', 'encoder.layers.1.src_src_att.v_layer.weight', 'encoder.layers.2.feed_forward.layer_norm.bias', 'encoder.layers.2.feed_forward.layer_norm.weight', 'encoder.layers.2.feed_forward.pwff_layer.0.bias', 'encoder.layers.2.feed_forward.pwff_layer.0.weight', 'encoder.layers.2.feed_forward.pwff_layer.3.bias', 'encoder.layers.2.feed_forward.pwff_layer.3.weight', 'encoder.layers.2.layer_norm.bias', 'encoder.layers.2.layer_norm.weight', 'encoder.layers.2.src_src_att.k_layer.bias', 'encoder.layers.2.src_src_att.k_layer.weight', 'encoder.layers.2.src_src_att.output_layer.bias', 'encoder.layers.2.src_src_att.output_layer.weight', 'encoder.layers.2.src_src_att.q_layer.bias', 'encoder.layers.2.src_src_att.q_layer.weight', 'encoder.layers.2.src_src_att.v_layer.bias', 'encoder.layers.2.src_src_att.v_layer.weight', 'gloss_output_layer.bias', 'gloss_output_layer.weight', 'sgn_embed.ln.bias', 'sgn_embed.ln.weight', 'sgn_embed.norm.norm.bias', 'sgn_embed.norm.norm.weight', 'txt_embed.lut.weight', 'txt_embed.norm.norm.bias', 'txt_embed.norm.norm.weight']
+2023-09-17 20:50:40,478 cfg.name                           : sign_experiment
+2023-09-17 20:50:40,478 cfg.data.data_path                 : data/
+2023-09-17 20:50:40,479 cfg.data.version                   : phoenix_2014_trans
+2023-09-17 20:50:40,479 cfg.data.sgn                       : sign
+2023-09-17 20:50:40,479 cfg.data.txt                       : text
+2023-09-17 20:50:40,479 cfg.data.gls                       : gloss
+2023-09-17 20:50:40,479 cfg.data.train                     : asl_flow/ASL_train_data_flow.pickle
+2023-09-17 20:50:40,479 cfg.data.dev                       : asl_flow/ASL_val_data_flow.pickle
+2023-09-17 20:50:40,479 cfg.data.test                      : asl_flow/ASL_test_data_flow.pickle
+2023-09-17 20:50:40,479 cfg.data.feature_size              : 1024
+2023-09-17 20:50:40,479 cfg.data.level                     : word
+2023-09-17 20:50:40,479 cfg.data.txt_lowercase             : True
+2023-09-17 20:50:40,480 cfg.data.max_sent_length           : 400
+2023-09-17 20:50:40,480 cfg.data.random_train_subset       : -1
+2023-09-17 20:50:40,480 cfg.data.random_dev_subset         : -1
+2023-09-17 20:50:40,480 cfg.testing.recognition_beam_sizes : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+2023-09-17 20:50:40,480 cfg.testing.translation_beam_sizes : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+2023-09-17 20:50:40,480 cfg.testing.translation_beam_alphas : [-1, 0, 1, 2, 3, 4, 5]
+2023-09-17 20:50:40,480 cfg.training.reset_best_ckpt       : False
+2023-09-17 20:50:40,480 cfg.training.reset_scheduler       : False
+2023-09-17 20:50:40,480 cfg.training.reset_optimizer       : False
+2023-09-17 20:50:40,481 cfg.training.random_seed           : 42
+2023-09-17 20:50:40,481 cfg.training.model_dir             : ./sign_sample_model
+2023-09-17 20:50:40,481 cfg.training.recognition_loss_weight : 1.0
+2023-09-17 20:50:40,481 cfg.training.translation_loss_weight : 1.0
+2023-09-17 20:50:40,481 cfg.training.eval_metric           : bleu
+2023-09-17 20:50:40,481 cfg.training.optimizer             : adam
+2023-09-17 20:50:40,481 cfg.training.learning_rate         : 0.001
+2023-09-17 20:50:40,481 cfg.training.batch_size            : 32
+2023-09-17 20:50:40,481 cfg.training.num_valid_log         : 5
+2023-09-17 20:50:40,481 cfg.training.epochs                : 5000000
+2023-09-17 20:50:40,481 cfg.training.early_stopping_metric : eval_metric
+2023-09-17 20:50:40,482 cfg.training.batch_type            : sentence
+2023-09-17 20:50:40,482 cfg.training.translation_normalization : batch
+2023-09-17 20:50:40,482 cfg.training.eval_recognition_beam_size : 1
+2023-09-17 20:50:40,482 cfg.training.eval_translation_beam_size : 1
+2023-09-17 20:50:40,482 cfg.training.eval_translation_beam_alpha : -1
+2023-09-17 20:50:40,482 cfg.training.overwrite             : True
+2023-09-17 20:50:40,482 cfg.training.shuffle               : True
+2023-09-17 20:50:40,482 cfg.training.use_cuda              : True
+2023-09-17 20:50:40,482 cfg.training.translation_max_output_length : 30
+2023-09-17 20:50:40,482 cfg.training.keep_last_ckpts       : 1
+2023-09-17 20:50:40,482 cfg.training.batch_multiplier      : 1
+2023-09-17 20:50:40,482 cfg.training.logging_freq          : 100
+2023-09-17 20:50:40,483 cfg.training.validation_freq       : 100
+2023-09-17 20:50:40,483 cfg.training.betas                 : [0.9, 0.998]
+2023-09-17 20:50:40,483 cfg.training.scheduling            : plateau
+2023-09-17 20:50:40,483 cfg.training.learning_rate_min     : 1e-07
+2023-09-17 20:50:40,483 cfg.training.weight_decay          : 0.001
+2023-09-17 20:50:40,483 cfg.training.patience              : 8
+2023-09-17 20:50:40,483 cfg.training.decrease_factor       : 0.7
+2023-09-17 20:50:40,483 cfg.training.label_smoothing       : 0.0
+2023-09-17 20:50:40,483 cfg.model.initializer              : xavier
+2023-09-17 20:50:40,483 cfg.model.bias_initializer         : zeros
+2023-09-17 20:50:40,483 cfg.model.init_gain                : 1.0
+2023-09-17 20:50:40,484 cfg.model.embed_initializer        : xavier
+2023-09-17 20:50:40,484 cfg.model.embed_init_gain          : 1.0
+2023-09-17 20:50:40,484 cfg.model.tied_softmax             : False
+2023-09-17 20:50:40,484 cfg.model.encoder.type             : transformer
+2023-09-17 20:50:40,484 cfg.model.encoder.num_layers       : 3
+2023-09-17 20:50:40,484 cfg.model.encoder.num_heads        : 8
+2023-09-17 20:50:40,484 cfg.model.encoder.embeddings.embedding_dim : 512
+2023-09-17 20:50:40,484 cfg.model.encoder.embeddings.scale : False
+2023-09-17 20:50:40,484 cfg.model.encoder.embeddings.dropout : 0.1
+2023-09-17 20:50:40,484 cfg.model.encoder.embeddings.norm_type : batch
+2023-09-17 20:50:40,484 cfg.model.encoder.embeddings.activation_type : softsign
+2023-09-17 20:50:40,484 cfg.model.encoder.hidden_size      : 512
+2023-09-17 20:50:40,485 cfg.model.encoder.ff_size          : 2048
+2023-09-17 20:50:40,485 cfg.model.encoder.dropout          : 0.1
+2023-09-17 20:50:40,485 cfg.model.decoder.type             : transformer
+2023-09-17 20:50:40,485 cfg.model.decoder.num_layers       : 3
+2023-09-17 20:50:40,485 cfg.model.decoder.num_heads        : 8
+2023-09-17 20:50:40,485 cfg.model.decoder.embeddings.embedding_dim : 512
+2023-09-17 20:50:40,485 cfg.model.decoder.embeddings.scale : False
+2023-09-17 20:50:40,485 cfg.model.decoder.embeddings.dropout : 0.1
+2023-09-17 20:50:40,485 cfg.model.decoder.embeddings.norm_type : batch
+2023-09-17 20:50:40,485 cfg.model.decoder.embeddings.activation_type : softsign
+2023-09-17 20:50:40,485 cfg.model.decoder.hidden_size      : 512
+2023-09-17 20:50:40,486 cfg.model.decoder.ff_size          : 2048
+2023-09-17 20:50:40,486 cfg.model.decoder.dropout          : 0.1
+2023-09-17 20:50:40,486 Data set sizes:
+	train 15189,
+	valid 1326,
+	test 1802
+2023-09-17 20:50:40,486 First training example:
+	[GLS] And I call them decorative elements because basically all they're meant to do is to enrich and color the page.
+	[TXT] and i call them decorative elements because basically all they're meant to do is to enrich and color the page.
+2023-09-17 20:50:40,486 First 10 words (gls): (0) <si> (1) <unk> (2) <pad> (3) the (4) to (5) and (6) a (7) you (8) of (9) that
+2023-09-17 20:50:40,486 First 10 words (txt): (0) <unk> (1) <pad> (2) <s> (3) </s> (4) the (5) to (6) and (7) you (8) a (9) of
+2023-09-17 20:50:40,486 Number of unique glosses (types): 24080
+2023-09-17 20:50:40,486 Number of unique words (types): 22649
+2023-09-17 20:50:40,486 SignModel(
+	encoder=TransformerEncoder(num_layers=3, num_heads=8),
+	decoder=TransformerDecoder(num_layers=3, num_heads=8),
+	sgn_embed=SpatialEmbeddings(embedding_dim=512, input_size=1024),
+	txt_embed=Embeddings(embedding_dim=512, vocab_size=22649))
+2023-09-17 20:50:40,512 EPOCH 1
+/home/devtrio3/Downloads/sign-lang/lib/python3.7/site-packages/torchtext/data/field.py:359: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  var = torch.tensor(arr, dtype=self.dtype, device=device)
+2023-09-17 20:50:50,413 [Epoch: 001 Step: 00000100] Batch Recognition Loss:   0.000000 => Gls Tokens per Sec:     8523 || Batch Translation Loss: 285.300385 => Txt Tokens per Sec:     8846 || Lr: 0.001000
+2023-09-17 22:10:25,680 Hooray! New best validation result [eval_metric]!
+2023-09-17 22:10:25,681 Saving new checkpoint.
+2023-09-17 22:10:26,375 Validation result at epoch   1, step      100: duration: 4775.9610s
+	Recognition Beam Size: 1	Translation Beam Size: 1	Translation Beam Alpha: -1
+	Recognition Loss: 12078.52344	Translation Loss: 182944.48438	PPL: 525.84576
+	Eval Metric: BLEU
+	WER 98.26	(DEL: 95.24,	INS: 0.00,	SUB: 3.02)
+	BLEU-4 0.00	(BLEU-1: 2.09,	BLEU-2: 0.00,	BLEU-3: 0.00,	BLEU-4: 0.00)
+	CHRF 3.24	ROUGE 2.30
+2023-09-17 22:10:26,377 Logging Recognition and Translation Outputs
+2023-09-17 22:10:26,377 ========================================================================================================================
+2023-09-17 22:10:26,377 Logging Sequence: 1aJwX9nRlmk_3-2-rgb_front
+2023-09-17 22:10:26,377 	Gloss Reference :	You're going to inhale and the crown of the head reaches up so that you're sitting tall, but you're not going to be propped this way.
+2023-09-17 22:10:26,378 	Gloss Hypothesis:	****** ***** ** ****** *** *** ***** ** *** **** ******* ** ** **** ****** ******* ***** *** ****** *** ***** ** ** ******* **** a
+2023-09-17 22:10:26,378 	Gloss Alignment :	D      D     D  D      D   D   D     D  D   D    D       D  D  D    D      D       D     D   D      D   D     D  D  D       D    S
+2023-09-17 22:10:26,378 	--------------------------------------------------------------------------------------------------------------------
+2023-09-17 22:10:26,384 	Text Reference  :	*** *** *** *** you're going to  inhale and the crown of  the head reaches up  so  that you're sitting tall, but you're not going to  be  propped this way.
+2023-09-17 22:10:26,384 	Text Hypothesis :	you you you you you    you   you you    you you you   you you you  you     you you you  you    you     you   you you    you you   you you you     you  you
+2023-09-17 22:10:26,384 	Text Alignment  :	I   I   I   I   S      S     S   S      S   S   S     S   S   S    S       S   S   S    S      S       S     S   S      S   S     S   S   S       S    S
+2023-09-17 22:10:26,385 ========================================================================================================================
+2023-09-17 22:10:26,385 Logging Sequence: C0fPZgeY2rg_5-5-rgb_front
+2023-09-17 22:10:26,385 	Gloss Reference :	What they do is they rub their head against something, here's the head over here.
+2023-09-17 22:10:26,385 	Gloss Hypothesis:	**** **** ** ** **** *** ***** **** ******* ********** ****** *** **** **** a
+2023-09-17 22:10:26,385 	Gloss Alignment :	D    D    D  D  D    D   D     D    D       D          D      D   D    D    S
+2023-09-17 22:10:26,385 	--------------------------------------------------------------------------------------------------------------------
+2023-09-17 22:10:26,389 	Text Reference  :	*** *** *** *** *** *** *** *** *** *** *** *** *** *** *** what they do  is  they rub their head against something, here's the head over here.
+2023-09-17 22:10:26,389 	Text Hypothesis :	you you you you you you you you you you you you you you you you  you  you you you  you you   you  you     you        you    you you  you  you
+2023-09-17 22:10:26,389 	Text Alignment  :	I   I   I   I   I   I   I   I   I   I   I   I   I   I   I   S    S    S   S   S    S   S     S    S       S          S      S   S    S    S
+2023-09-17 22:10:26,390 ========================================================================================================================
+2023-09-17 22:10:26,390 Logging Sequence: a4Nxq0QV_WA_5-5-rgb_front
+2023-09-17 22:10:26,390 	Gloss Reference :	Remember to turn 90 degrees in bringing this leg up in a good situation.
+2023-09-17 22:10:26,390 	Gloss Hypothesis:	******** ** **** ** ******* ** ******** **** *** ** ** a **** **********
+2023-09-17 22:10:26,390 	Gloss Alignment :	D        D  D    D  D       D  D        D    D   D  D    D    D
+2023-09-17 22:10:26,390 	--------------------------------------------------------------------------------------------------------------------
+2023-09-17 22:10:26,394 	Text Reference  :	*** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** remember to  turn 90  degrees in  bringing this leg up  in  a   good situation.
+2023-09-17 22:10:26,394 	Text Hypothesis :	you you you you you you you you you you you you you you you you you      you you  you you     you you      you  you you you you you  you
+2023-09-17 22:10:26,394 	Text Alignment  :	I   I   I   I   I   I   I   I   I   I   I   I   I   I   I   I   S        S   S    S   S       S   S        S    S   S   S   S   S    S
+2023-09-17 22:10:26,395 ========================================================================================================================
+2023-09-17 22:10:26,395 Logging Sequence: a4Nxq0QV_WA_6-5-rgb_front
+2023-09-17 22:10:26,395 	Gloss Reference :	I'll bring this one here and clamp this one straight down towards the floor, pinch the knees together and bridge up.
+2023-09-17 22:10:26,395 	Gloss Hypothesis:	**** ***** **** *** **** *** ***** **** *** ******** **** ******* *** ****** ***** *** ***** ******** *** ****** a
+2023-09-17 22:10:26,395 	Gloss Alignment :	D    D     D    D   D    D   D     D    D   D        D    D       D   D      D     D   D     D        D   D      S
+2023-09-17 22:10:26,395 	--------------------------------------------------------------------------------------------------------------------
+2023-09-17 22:10:26,400 	Text Reference  :	*** *** *** *** *** *** *** *** *** i'll bring this one here and clamp this one straight down towards the floor, pinch the knees together and bridge up.
+2023-09-17 22:10:26,401 	Text Hypothesis :	you you you you you you you you you you  you   you  you you  you you   you  you you      you  you     you you    you   you you   you      you you    you
+2023-09-17 22:10:26,401 	Text Alignment  :	I   I   I   I   I   I   I   I   I   S    S     S    S   S    S   S     S    S   S        S    S       S   S      S     S   S     S        S   S      S
+2023-09-17 22:10:26,401 ========================================================================================================================
+2023-09-17 22:10:26,401 Logging Sequence: f5EGPzGSCJs_10-8-rgb_front
+2023-09-17 22:10:26,401 	Gloss Reference :	Simply follow directions and it tells you exactly how much to use, when you should do a water change.
+2023-09-17 22:10:26,402 	Gloss Hypothesis:	****** ****** ********** *** ** ***** *** ******* *** **** ** **** **** *** ****** ** a ***** *******
+2023-09-17 22:10:26,402 	Gloss Alignment :	D      D      D          D   D  D     D   D       D   D    D  D    D    D   D      D    D     D
+2023-09-17 22:10:26,402 	--------------------------------------------------------------------------------------------------------------------
+2023-09-17 22:10:26,406 	Text Reference  :	*** *** *** *** *** *** *** *** *** *** *** simply follow directions and it  tells you exactly how much to  use, when you should do  a   water change.
+2023-09-17 22:10:26,407 	Text Hypothesis :	you you you you you you you you you you you you    you    you        you you you   you you     you you  you you  you  you you    you you you   you
+2023-09-17 22:10:26,407 	Text Alignment  :	I   I   I   I   I   I   I   I   I   I   I   S      S      S          S   S   S         S       S   S    S   S    S        S      S   S   S     S
+2023-09-17 22:10:26,407 ========================================================================================================================
+2023-09-17 22:10:36,566 [Epoch: 001 Step: 00000200] Batch Recognition Loss:   0.000000 => Gls Tokens per Sec:     8187 || Batch Translation Loss: 150.677246 => Txt Tokens per Sec:     8501 || Lr: 0.001000

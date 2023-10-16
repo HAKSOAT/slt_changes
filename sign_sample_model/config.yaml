@@ -1,7 +1,7 @@
 name: sign_experiment
 data:
     data_path: data/
-    version: asl_flow_trans
+    version: phoenix_2014_trans
     sgn: sign
     txt: text
     gls: gloss
@@ -58,8 +58,8 @@ training:
     learning_rate: 0.001
     batch_size: 32
     num_valid_log: 5
-    epochs: 5
-#    epochs: 5000000
+    #epochs: 5
+    epochs: 15
     early_stopping_metric: eval_metric
     batch_type: sentence
     translation_normalization: batch

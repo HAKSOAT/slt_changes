@@ -9,6 +9,7 @@ import os
 import shutil
 import time
 import queue
+import wandb
 
 from signjoey.model import build_model
 from signjoey.batch import Batch
@@ -35,6 +36,7 @@ from torch.utils.tensorboard import SummaryWriter
 from torchtext.data import Dataset
 from typing import List, Dict
 
+wandb.init(project='ASL')
 
 # pylint: disable=too-many-instance-attributes
 class TrainManager:
@@ -875,6 +877,33 @@ class TrainManager:
                     "*" if new_best else "",
                 )
             )
+
+            metrics = {
+            "Steps": self.steps,
+            "Recognition Loss": valid_recognition_loss if self.do_recognition else -1,
+            "Translation Loss": valid_translation_loss if self.do_translation else -1,
+            "PPL": valid_ppl if self.do_translation else -1,
+            "Eval Metric": eval_metric,
+            # WER
+            "WER": valid_scores["wer"] if self.do_recognition else -1,
+            "DEL Rate": valid_scores["wer_scores"]["del_rate"] if self.do_recognition else -1,
+            "INS Rate": valid_scores["wer_scores"]["ins_rate"] if self.do_recognition else -1,
+            "SUB Rate": valid_scores["wer_scores"]["sub_rate"] if self.do_recognition else -1,
+            # BLEU
+            "BLEU-4": valid_scores["bleu"] if self.do_translation else -1,
+            "BLEU-1": valid_scores["bleu_scores"]["bleu1"] if self.do_translation else -1,
+            "BLEU-2": valid_scores["bleu_scores"]["bleu2"] if self.do_translation else -1,
+            "BLEU-3": valid_scores["bleu_scores"]["bleu3"] if self.do_translation else -1,
+            "BLEU-4": valid_scores["bleu_scores"]["bleu4"] if self.do_translation else -1,
+            # Other
+            "CHRF": valid_scores["chrf"] if self.do_translation else -1,
+            "ROUGE": valid_scores["rouge"] if self.do_translation else -1,
+            "LR": current_lr,
+            "New Best": new_best,
+        }
+
+         # Log the metrics using Wandb
+        wandb.log(metrics)
 
     def _log_parameters_list(self) -> None:
         """

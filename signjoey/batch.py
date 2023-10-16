@@ -43,11 +43,7 @@ class Batch:
 
         # Doing this as I found the initial values for self.sign_lengths to be sometimes errorneous.
         # For example when self.sgn was [1, 1, 1024], self.sgn_lengths was 1024 instead of 1.
-        # So I am making an assumption that the first value will always be 1 and the second value indicates the actual sign lengths.
-        self.sgn_lengths = torch.Tensor([self.sgn.shape[1]])
-        assert self.sgn.shape[0] == 1, "This error may be the result of an error in assumption in my code. " \
-                                       "Please look at the code in the traceback for more context and " \
-                                       "perhaps remove the line that overwrites self.sgn_lengths."
+        self.sgn_lengths = torch.Tensor([len(i) for i in self.sgn])
 
         # Here be dragons
         if frame_subsampling_ratio:

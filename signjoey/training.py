@@ -621,6 +621,24 @@ class TrainManager:
                         train_eval_res["valid_scores"]["chrf"] if self.do_translation else -1,
                         train_eval_res["valid_scores"]["rouge"] if self.do_translation else -1,
                     )
+
+                    train_eval_seq = [s for s in batch.sequence]
+                    # store validation set outputs and references
+                    if self.do_recognition:
+                        self._store_outputs(
+                            "dev.hyp.gls", train_eval_seq, train_eval_res["gls_hyp"], "train_gls"
+                        )
+                        self._store_outputs(
+                            "references.dev.gls", train_eval_seq, train_eval_res["gls_ref"], "train_gls"
+                        )
+
+                    if self.do_translation:
+                        self._store_outputs(
+                            "dev.hyp.txt", train_eval_seq, train_eval_res["txt_hyp"], "train_txt"
+                        )
+                        self._store_outputs(
+                            "references.dev.txt", train_eval_seq, train_eval_res["txt_ref"], "train_txt"
+                        )
                         
 
                 # validate on the entire dev set

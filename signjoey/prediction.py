@@ -9,7 +9,7 @@ import pickle as pickle
 import time
 import torch.nn as nn
 
-from typing import List
+from typing import List, Union
 from torchtext.data import Dataset
 from signjoey.loss import XentLoss
 from signjoey.helpers import (
@@ -32,7 +32,7 @@ from signjoey.phoenix_utils.phoenix_cleanup import (
 # pylint: disable=too-many-arguments,too-many-locals,no-member
 def validate_on_data(
     model: SignModel,
-    data: Dataset,
+    data: Union[Dataset, Batch],
     batch_size: int,
     use_cuda: bool,
     sgn_dim: int,
@@ -102,8 +102,6 @@ def validate_on_data(
         - decoded_valid: raw validation hypotheses (before post-processing),
         - valid_attention_scores: attention scores for validation hypotheses
     """
-
-
     valid_iter = make_data_iter(
         dataset=data,
         batch_size=batch_size,
@@ -111,6 +109,15 @@ def validate_on_data(
         shuffle=False,
         train=False,
     )
+
+    if isinstance(data, Dataset):
+        valid_iter = iter(make_data_iter(
+            dataset=data,
+            batch_size=batch_size,
+            batch_type=batch_type,
+            shuffle=False,
+            train=False,
+        ))
 
     # disable dropout
     model.eval()
@@ -124,18 +131,26 @@ def validate_on_data(
         total_num_txt_tokens = 0
         total_num_gls_tokens = 0
         total_num_seqs = 0
-        for valid_batch in iter(valid_iter):
-            if not valid_batch:
-                continue
 
-            batch = Batch(
-                is_train=False,
-                torch_batch=valid_batch,
-                txt_pad_index=txt_pad_index,
-                sgn_dim=sgn_dim,
-                use_cuda=use_cuda,
-                frame_subsampling_ratio=frame_subsampling_ratio,
-            )
+        # Creating a dummy valid iter if the batch already exists
+        # This scenario occurs when looking to validate on the batch just trained on
+        # As the Batch instance is going to be passed in directly, rather than a Dataset instance.
+        if isinstance(data, Batch):
+            valid_iter = range(1)
+
+        for valid_batch in valid_iter:
+            if isinstance(data, Dataset):
+                batch = Batch(
+                    is_train=False,
+                    torch_batch=valid_batch,
+                    txt_pad_index=txt_pad_index,
+                    sgn_dim=sgn_dim,
+                    use_cuda=use_cuda,
+                    frame_subsampling_ratio=frame_subsampling_ratio,
+                )
+            else:
+                batch = data
+
             sort_reverse_index = batch.sort_by_sgn_lengths()
 
             batch_recognition_loss, batch_translation_loss = model.get_loss_for_batch(
@@ -191,7 +206,11 @@ def validate_on_data(
             )
 
         if do_recognition:
-            assert len(all_gls_outputs) == len(data)
+            if isinstance(data, Dataset):
+                assert len(all_gls_outputs) == len(data)
+            else:
+                assert len(all_gls_outputs) == len(data.gls_lengths)
+
             if (
                 recognition_loss_function is not None
                 and recognition_loss_weight != 0
@@ -212,7 +231,12 @@ def validate_on_data(
                 raise ValueError("Unknown Dataset Version: " + dataset_version)
 
             # Construct gloss sequences for metrics
-            gls_ref = [gls_cln_fn(" ".join(t)) for t in data.gls]
+            if isinstance(data, Dataset):
+                data_gls = data.gls
+            else:
+                data_gls = model.gls_vocab.arrays_to_sentences(arrays=data.gls)
+
+            gls_ref = [gls_cln_fn(" ".join(t)) for t in data_gls]
             gls_hyp = [gls_cln_fn(" ".join(t)) for t in decoded_gls]
             assert len(gls_ref) == len(gls_hyp)
 
@@ -220,7 +244,10 @@ def validate_on_data(
             gls_wer_score = wer_list(hypotheses=gls_hyp, references=gls_ref)
 
         if do_translation:
-            assert len(all_txt_outputs) == len(data)
+            if isinstance(data, Dataset):
+                assert len(all_txt_outputs) == len(data)
+            else:
+                assert len(all_txt_outputs) == len(data.txt_lengths)
             if (
                 translation_loss_function is not None
                 and translation_loss_weight != 0
@@ -238,7 +265,12 @@ def validate_on_data(
             # evaluate with metric on full dataset
             join_char = " " if level in ["word", "bpe"] else ""
             # Construct text sequences for metrics
-            txt_ref = [join_char.join(t) for t in data.txt]
+            if isinstance(data, Dataset):
+                data_txt = data.gls
+            else:
+                data_txt = model.txt_vocab.arrays_to_sentences(arrays=data.txt)
+
+            txt_ref = [join_char.join(t) for t in data_txt]
             txt_hyp = [join_char.join(t) for t in decoded_txt]
             # post-process
             if level == "bpe":

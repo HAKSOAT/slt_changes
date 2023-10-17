@@ -57,9 +57,10 @@ training:
     optimizer: adam
     learning_rate: 0.001
     batch_size: 32
-    num_valid_log: 5
     #epochs: 5
-    epochs: 15
+    epochs: 10
+    num_valid_log: 5 # This determines how many examples are logged to the console during validation logging, where the system shows results of predictions.
+#    epochs: 500000
     early_stopping_metric: eval_metric
     batch_type: sentence
     translation_normalization: batch
@@ -70,10 +71,12 @@ training:
     shuffle: true
     use_cuda: true
     translation_max_output_length: 30
-    keep_last_ckpts: 1
+    keep_last_ckpts: 5 # This determines how many checkpoints maximum are going to be saved. If you want more to be saved, then you need to use a larger number.
     batch_multiplier: 1
-    logging_freq: 100
-    validation_freq: 100
+    train_evaluation_freq: 1 # This controls how often evaluation on the batch dataset happens.
+    logging_freq: 1 # This controls how often logging happens. Logging shows the train loss.
+    validation_freq: 1 # This controls how often validation happens. This is where validation is done with the validation dataset.
+
     betas:
     - 0.9
     - 0.998

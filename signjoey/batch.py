@@ -41,6 +41,10 @@ class Batch:
         # Sign
         self.sgn, self.sgn_lengths = torch_batch.sgn
 
+        # Doing this as I found the initial values for self.sign_lengths to be sometimes errorneous.
+        # For example when self.sgn was [1, 1, 1024], self.sgn_lengths was 1024 instead of 1.
+        self.sgn_lengths = torch.Tensor([len(i) for i in self.sgn])
+
         # Here be dragons
         if frame_subsampling_ratio:
             tmp_sgn = torch.zeros_like(self.sgn)

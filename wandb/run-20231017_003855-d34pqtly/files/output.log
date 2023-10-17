@@ -82,7 +82,7 @@
 2023-10-17 00:39:56,834 cfg.model.decoder.hidden_size      : 512
 2023-10-17 00:39:56,834 cfg.model.decoder.ff_size          : 2048
 2023-10-17 00:39:56,834 cfg.model.decoder.dropout          : 0.1
-2023-10-17 00:39:56,834 Data set sizes: 
+2023-10-17 00:39:56,834 Data set sizes:
 	train 15189,
 	valid 1326,
 	test 1802
@@ -99,4 +99,26 @@
 	sgn_embed=SpatialEmbeddings(embedding_dim=512, input_size=1024),
 	txt_embed=Embeddings(embedding_dim=512, vocab_size=22649))
 2023-10-17 00:39:56,860 EPOCH 1
+/home/devtrio3/Downloads/sign-lang/lib/python3.7/site-packages/torchtext/data/field.py:359: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  var = torch.tensor(arr, dtype=self.dtype, device=device)
 2023-10-17 00:39:57,073 [Epoch: 001 Step: 00000001] Batch Recognition Loss:   0.000000 => Gls Tokens per Sec:     4368 || Batch Translation Loss: 301.125488 => Txt Tokens per Sec:     4519 || Lr: 0.001000
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.7/runpy.py", line 193, in _run_module_as_main
+    "__main__", mod_spec)
+  File "/opt/conda/lib/python3.7/runpy.py", line 85, in _run_code
+    exec(code, run_globals)
+  File "/home/devtrio3/Downloads/slt_changes/signjoey/__main__.py", line 37, in <module>
+    main()
+  File "/home/devtrio3/Downloads/slt_changes/signjoey/__main__.py", line 29, in main
+    train(cfg_file=args.config_path)
+  File "/home/devtrio3/Downloads/slt_changes/signjoey/training.py", line 1250, in train
+    trainer.train_and_validate(train_data=train_data, valid_data=dev_data)
+  File "/home/devtrio3/Downloads/slt_changes/signjoey/training.py", line 513, in train_and_validate
+    frame_subsampling_ratio=self.frame_subsampling_ratio,
+  File "/home/devtrio3/Downloads/slt_changes/signjoey/prediction.py", line 110, in validate_on_data
+    train=False,
+  File "/home/devtrio3/Downloads/slt_changes/signjoey/data.py", line 270, in make_data_iter
+    sort=False,
+  File "/home/devtrio3/Downloads/sign-lang/lib/python3.7/site-packages/torchtext/data/iterator.py", line 61, in __init__
+    self.sort_key = dataset.sort_key
+AttributeError: 'Batch' object has no attribute 'sort_key'

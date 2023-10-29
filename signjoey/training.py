@@ -386,6 +386,10 @@ class TrainManager:
                 processed_txt_tokens = self.total_txt_tokens
                 epoch_translation_loss = 0
 
+            logging_freq = self.logging_freq
+            train_evaluation_freq = self.train_evaluation_freq
+            validation_freq = self.validation_freq
+
             for batch in iter(train_iter):
                 # reactivate training
                 # create a Batch object from torchtext batch
@@ -433,7 +437,11 @@ class TrainManager:
                     self.scheduler.step()
 
                 # log learning progress
-                if self.steps % self.logging_freq == 0 and update:
+                if self.steps % logging_freq == 0 and update:
+                    # This ensures logging only happens once in an epoch
+                    if logging_freq == -1:
+                        logging_freq = float("inf")
+
                     elapsed = time.time() - start - total_valid_duration
 
                     log_out = "[Epoch: {:03d} Step: {:08d}] ".format(
@@ -468,7 +476,11 @@ class TrainManager:
                     total_valid_duration = 0
 
                 # validate on the batch of the dataset the model was just trained on
-                if self.steps % self.train_evaluation_freq == 0 and update:
+                if self.steps % train_evaluation_freq == 0 and update:
+                    # This ensures train_evaluation only happens once in an epoch
+                    if train_evaluation_freq == -1:
+                        train_evaluation_freq = float("inf")
+
                     train_eval_res = validate_on_data(
                         model=self.model,
                         data=batch,
@@ -642,7 +654,11 @@ class TrainManager:
                         
 
                 # validate on the entire dev set
-                if self.steps % self.validation_freq == 0 and update:
+                if self.steps % validation_freq == 0 and update:
+                    # This ensures train_evaluation only happens once in an epoch
+                    if validation_freq == -1:
+                        validation_freq = float("inf")
+
                     valid_start_time = time.time()
                     # TODO (Cihan): There must be a better way of passing
                     #   these recognition only and translation only parameters!

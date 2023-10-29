@@ -51,8 +51,8 @@ training:
     reset_optimizer: false
     random_seed: 42
     model_dir: "./sign_sample_model"
-    recognition_loss_weight: 1.0
-    translation_loss_weight: 1.0
+    recognition_loss_weight: 0.0 # Making this 0.0 turns off recognition part of the module while greater than 0.0 turns it on.
+    translation_loss_weight: 1.0 # Making this 0.0 turns off translation part of the module while greater than 0.0 turns it on.
     eval_metric: bleu
     optimizer: adam
     learning_rate: 0.001
@@ -72,9 +72,9 @@ training:
     translation_max_output_length: 30
     keep_last_ckpts: 5 # This determines how many checkpoints maximum are going to be saved. If you want more to be saved, then you need to use a larger number.
     batch_multiplier: 1
-    train_evaluation_freq: 1 # This controls how often evaluation on the batch dataset happens.
+    train_evaluation_freq: -1 # This controls how often evaluation on the batch dataset happens.
     logging_freq: 1 # This controls how often logging happens. Logging shows the train loss.
-    validation_freq: 1 # This controls how often validation happens. This is where validation is done with the validation dataset.
+    validation_freq: -1 # This controls how often validation happens. This is where validation is done with the validation dataset.
 
     betas:
     - 0.9
